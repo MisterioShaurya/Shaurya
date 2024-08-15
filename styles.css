@@ -1,0 +1,213 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: rgb(254, 244, 244);
+}
+div.sh{
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    padding-top: 150px;
+}
+h3.head{
+    font-family: consolas;
+    font-size: 25px;
+}
+h1.mainhead{
+    font-size: 50px;;
+    font-family: Yu Gothic UI;
+    background-image: linear-gradient(60deg,red,blue);
+    background-size: cover;
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+h2.head2{
+    font-size: 30px;
+}
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 1px;
+    text-align: center;
+    top: 0;
+    position: sticky;
+}
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+nav ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+main {
+    padding: 20px;
+}
+section {
+    margin-bottom: 40px;
+}
+#about{
+    text-align: center;
+}
+.aboutme{
+    font-size: 40px;
+}
+.aboutmepara{
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding-bottom: 20px;
+}
+h2 {
+    color: #333;
+}
+.project {
+    border: none;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+footer {
+    background-color: #333;
+    color: #fff;
+    padding: 1px;
+    text-align: center;
+}
+#projects{
+    text-align: center;
+}
+.pro{
+    font-size: 40px;
+}
+.headpro{
+    font-size: 30px;
+}
+.parapro{
+    font-size: 20px;
+}
+.container {
+    width: 100%; 
+    background-color: #ddd; 
+    border-radius: 5px;
+}
+ .skills {
+    text-align: right; 
+    padding-top: 2px; 
+    padding-bottom: 2px; 
+    color: white; 
+    border-radius: 5px;
+}
+  .html {width: 95%; background-color: rgb(170, 216, 230);} 
+  .css {width: 80%; background-color: rgb(180, 220, 232);} 
+  .python {width: 85%; background-color: rgb(190, 216, 230);}  
+  .java {width: 70%; background-color: rgb(200, 216, 230);}  
+  .kotlin {width: 60%; background-color: rgb(210, 216, 230);}   
+  .myskills{
+    font-size:40px;
+    text-align:center;
+}
+  .skillval{
+    padding-right: 8px;
+    font-family: 'Times New Roman', Times, serif;
+    color: #000000;
+}
+  #contact{
+    height: max-content;
+    width: max-content;
+    background-color: rgba(255, 179, 179, 0.279);
+    border-radius: 10px;
+    padding-right: 32px;
+    padding-top: 8px;
+    padding-left: 8px;
+    padding-bottom: 16px;
+}
+  .contactme{
+    padding-top: 10px;
+    padding-left: 20px;
+}
+  form{
+    padding-left: 40px;
+}
+  .btn{
+    border-radius: 8px;
+    height: 40px;
+    width: 60px;
+    font-size: 20px;
+    font-family: consolas;
+    background-color: rgba(255, 179, 179, 0.721);
+    border: hidden;
+}
+  label{
+    font-size: 20px;
+    font-weight:300;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+.iframeofgalery{
+    width: max-content;
+    height: max-content;
+}
+.linkbutton{
+    border: none;
+    border-radius: 8px;
+    height: 40px;
+    border: 2px grey solid;
+    width: 100px;
+    transition-duration: 0.4s;
+}
+.linkbutton:hover {
+    background-color: rgba(128, 128, 128, 0.461); /* Green */
+    color: white;
+  }
+.links{
+    color: black;
+    font-size: 14px;
+    text-decoration: none;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
+  }
+  
+  .cell {
+    background-color: white;
+    border:none;
+    border-radius: 20px;
+    padding: 20px;
+    margin: 10px 10px 10px 10px;
+    text-align: center;
+    transition-duration: 0.8s;
+  }
+  .cell:hover{
+    box-shadow: 5px 5px 5px #aaaaaa;
+  }
+  
+  @media (max-width: 600px) {
+    .grid-container {
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }  
+  .follow{
+    color: white;
+  }
+  .animate-bottom {
+    position: relative;
+    -webkit-animation-name: animatebottom;
+    -webkit-animation-duration: 1s;
+    animation-name: animatebottom;
+    animation-duration: 1s
+  }
+  
+  @-webkit-keyframes animatebottom {
+    from { bottom:-100px; opacity:0 } 
+    to { bottom:0px; opacity:1 }
+  }
+  
+  @keyframes animatebottom { 
+    from{ bottom:-100px; opacity:0 } 
+    to{ bottom:0; opacity:1 }
+  }
