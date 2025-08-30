@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shaurya | R3VEX:Origins</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Roboto+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #1e3a8a;
+            --secondary: #6b7280;
+            --accent: #60a5fa;
+            --dark: #111827;
+            --light: #f3f4f6;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--dark);
+            color: var(--light);
+            scroll-behavior: smooth;
+        }
+        
+        .mono {
+            font-family: 'Roboto Mono', monospace;
+        }
+        
+        .terminal-cursor {
+            display: inline-block;
+            width: 10px;
+            height: 24px;
+            background-color: var(--accent);
+            animation: blink 1s infinite;
+            vertical-align: middle;
+            margin-left: 2px;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        
+        .section-divider {
+            position: relative;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            margin: 80px auto;
+            width: 80%;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+        
+        .section-divider.visible {
+            opacity: 1;
+        }
+        
+        .card-hover {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(30, 58, 138, 0.3);
+        }
+        
+        .upcoming-card {
+            opacity: 0.8;
+            filter: grayscale(20%);
+        }
+        
+        .upcoming-card:hover {
+            opacity: 1;
+            filter: grayscale(0%);
+        }
+        
+        .skill-item {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        
+        .skill-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .scroll-down {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        
+        .typing-text {
+            overflow: hidden;
+            border-right: 2px solid var(--accent);
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: 1px;
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--accent); }
+        }
+        
+        .form-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px var(--accent);
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .header-scrolled {
+            background-color: rgba(17, 24, 39, 0.9);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header id="header" class="fixed w-full z-50 transition-all duration-300">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-xl font-bold mono">
+                    <span class="text-blue-400">Shaurya</span> | <span class="text-gray-400">R3VEX:Origins</span>
+                </div>
+                <nav class="hidden md:block">
+                    <ul class="flex space-x-8">
+                        <li><a href="#about" class="nav-link text-gray-300 hover:text-white">About</a></li>
+                        <li><a href="#skills" class="nav-link text-gray-300 hover:text-white">Skills</a></li>
+                        <li><a href="#companies" class="nav-link text-gray-300 hover:text-white">Companies</a></li>
+                        <li><a href="#projects" class="nav-link text-gray-300 hover:text-white">Projects</a></li>
+                        <li><a href="#contact" class="nav-link text-gray-300 hover:text-white">Contact</a></li>
+                    </ul>
+                </nav>
+                <button class="md:hidden text-gray-300 focus:outline-none">
+                    <i class="fas fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="hero" class="min-h-screen flex items-center justify-center relative pt-20">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-8">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6 mono">
+                    <span class="text-blue-400">></span> Hello, I am Shaurya<span class="terminal-cursor"></span>
+                </h1>
+                <div class="typing-text text-xl md:text-2xl text-gray-300 mono max-w-2xl mx-auto">
+                    Cybersecurity Expert | Full Stack Developer | Founder & CEO of R3VEX:Origins
+                </div>
+            </div>
+            <div class="mt-12">
+                <a href="#about" class="inline-block px-8 py-3 bg-blue-600 hover:bg-blue-700 rounded-full text-white font-medium transition-all duration-300 transform hover:scale-105">
+                    Explore More
+                </a>
+            </div>
+            <div class="scroll-down">
+                <a href="#about" class="text-gray-400 hover:text-white">
+                    <i class="fas fa-chevron-down text-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center mono">
+                <span class="text-blue-400">></span> About Me<span class="terminal-cursor"></span>
+            </h2>
+            
+            <div class="max-w-4xl mx-auto">
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-8 backdrop-blur-sm">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="w-full md:w-1/3">
+                            <div class="bg-gradient-to-br from-blue-600 to-gray-700 rounded-xl aspect-square overflow-hidden">
+                                <!-- Placeholder for profile image -->
+                                <div class="w-full h-full flex items-center justify-center">
+                                    <i class="fas fa-user-tie text-6xl text-gray-300"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-2/3">
+                            <p class="text-gray-300 mb-6 leading-relaxed">
+                                I'm Shaurya, a 16-year-old entrepreneur, developer, and cybersecurity expert. As the Founder & CEO of R3VEX:Origins, I lead a team dedicated to creating innovative tech solutions that push boundaries.
+                            </p>
+                            <p class="text-gray-300 mb-6 leading-relaxed">
+                                My journey began with a passion for technology and problem-solving, which quickly evolved into building businesses and developing advanced software solutions. I believe in continuous learning and pushing the limits of what's possible.
+                            </p>
+                            <div class="border-l-4 border-blue-500 pl-4 my-6">
+                                <p class="text-gray-200 italic mono">
+                                    "Building the future, one line of code at a time."
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-divider"></div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center mono">
+                <span class="text-blue-400">></span> Skills & Expertise<span class="terminal-cursor"></span>
+            </h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- Skill 1 -->
+                <div class="skill-item bg-gray-800 bg-opacity-50 rounded-xl p-6 backdrop-blur-sm card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-shield-alt text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Cybersecurity Expert</h3>
+                    </div>
+                    <p class="text-gray-300">
+                        Red/Blue team operations, penetration testing, vulnerability assessment, and security architecture design.
+                    </p>
+                </div>
+                
+                <!-- Skill 2 -->
+                <div class="skill-item bg-gray-800 bg-opacity-50 rounded-xl p-6 backdrop-blur-sm card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-code text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Full Stack Developer</h3>
+                    </div>
+                    <p class="text-gray-300">
+                        MERN stack (MongoDB, Express, React, Node.js) with Python backend development and RESTful API design.
+                    </p>
+                </div>
+                
+                <!-- Skill 3 -->
+                <div class="skill-item bg-gray-800 bg-opacity-50 rounded-xl p-6 backdrop-blur-sm card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-cube text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">3D Artist</h3>
+                    </div>
+                    <p class="text-gray-300">
+                        Blender modeling, texturing, and animation for product visualization and game assets.
+                    </p>
+                </div>
+                
+                <!-- Skill 4 -->
+                <div class="skill-item bg-gray-800 bg-opacity-50 rounded-xl p-6 backdrop-blur-sm card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-gamepad text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Gamer</h3>
+                    </div>
+                    <p class="text-gray-300">
+                        Competitive gaming strategies and open-world game analysis with focus on game mechanics.
+                    </p>
+                </div>
+                
+                
+                <!-- Skill 7 -->
+                <div class="skill-item bg-gray-800 bg-opacity-50 rounded-xl p-6 backdrop-blur-sm card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center mr-4">
+                            <i class="fab fa-android text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Android Developer</h3>
+                    </div>
+                    <p class="text-gray-300">
+                        Native Android app development with Kotlin and Java, following Material Design guidelines.
+                    </p>
+                </div>
+                
+                <!-- Skill 8 -->
+                <div class="skill-item bg-gray-800 bg-opacity-50 rounded-xl p-6 backdrop-blur-sm card-hover">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 rounded-lg bg-blue-600 flex items-center justify-center mr-4">
+                            <i class="fab fa-python text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold">Advanced Python Developer</h3>
+                    </div>
+                    <p class="text-gray-300">
+                        Automation scripts, AI/ML implementations, web scraping, and complex system integrations.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="section-divider"></div>
+    </section>
+
+    <!-- Companies Section -->
+    <section id="companies" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center mono">
+                <span class="text-blue-400">></span> Companies<span class="terminal-cursor"></span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-6xl mx-auto">
+                <!-- R3VEX:Origins -->
+                <div class="skill-item bg-gray-800 bg-opacity-50 rounded-xl p-8 backdrop-blur-sm card-hover">
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="w-full md:w-1/4">
+                            <div class="bg-gradient-to-br from-blue-600 to-gray-700 rounded-xl aspect-square overflow-hidden flex items-center justify-center">
+                                <i class="fas fa-shield-alt text-4xl text-gray-300"></i>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-3/4">
+                            <h3 class="text-2xl font-bold mb-2">R3VEX:Origins</h3>
+                            <p class="text-blue-400 mb-4 mono">Founder & CEO</p>
+                            <p class="text-gray-300">
+                                A high-end online tech solutions agency offering advanced digital services, cybersecurity, AI, automation, and full-stack development. Leading a team of experts to deliver cutting-edge technology solutions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- The Chaos Network -->
+                <div class="skill-item bg-gray-800 bg-opacity-30 rounded-xl p-8 backdrop-blur-sm card-hover">
+                    <div class="flex flex-col md:flex-row items-center gap-6">
+                        <div class="w-full md:w-1/4">
+                            <div class="bg-gradient-to-br from-gray-600 to-gray-800 rounded-xl aspect-square overflow-hidden flex items-center justify-center">
+                                <i class="fas fa-network-wired text-4xl text-gray-400"></i>
+                            </div>
+                        </div>
+                        <div class="w-full md:w-3/4">
+                            <h3 class="text-2xl font-bold mb-2">The Chaos Network</h3>
+                            <p class="text-blue-400 mb-4 mono">
+                                <span class="typing-text inline-block">Coming Soon</span><span class="terminal-cursor"></span>
+                            </p>
+                            <p class="text-gray-400">
+                                A next-gen networking platform that blends real-time interactions, community-driven growth (points, badges, verification), and a clean, terminal-inspired design to create a powerful space for collaboration and connection.
+                            </p>
+                            <p class="text-gray-500 italic mt-2 mono">"Where chaos becomes community."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-divider"></div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center mono">
+                <span class="text-blue-400">></span> Selected Projects<span class="terminal-cursor"></span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- Project 1 -->
+                <div class="skill-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden backdrop-blur-sm card-hover">
+                    <div class="h-48 bg-gradient-to-br from-blue-600 to-gray-700 flex items-center justify-center">
+                        <i class="fas fa-lock text-5xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Security Framework</h3>
+                        <p class="text-gray-300 mb-4">
+                            Comprehensive cybersecurity framework for enterprise-level protection against modern threats.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-600 bg-opacity-30 rounded-full text-sm text-blue-200">Cybersecurity</span>
+                            <span class="px-3 py-1 bg-blue-600 bg-opacity-30 rounded-full text-sm text-blue-200">Python</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="skill-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden backdrop-blur-sm card-hover">
+                    <div class="h-48 bg-gradient-to-br from-blue-600 to-gray-700 flex items-center justify-center">
+                        <i class="fas fa-robot text-5xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">AI Automation Suite</h3>
+                        <p class="text-gray-300 mb-4">
+                            Custom AI-powered automation tools for business processes and productivity enhancement.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-600 bg-opacity-30 rounded-full text-sm text-blue-200">AI</span>
+                            <span class="px-3 py-1 bg-blue-600 bg-opacity-30 rounded-full text-sm text-blue-200">Python</span>
+                            <span class="px-3 py-1 bg-blue-600 bg-opacity-30 rounded-full text-sm text-blue-200">ML</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="skill-item bg-gray-800 bg-opacity-50 rounded-xl overflow-hidden backdrop-blur-sm card-hover">
+                    <div class="h-48 bg-gradient-to-br from-blue-600 to-gray-700 flex items-center justify-center">
+                        <i class="fas fa-mobile-alt text-5xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Mobile Security App</h3>
+                        <p class="text-gray-300 mb-4">
+                            Android application for personal device security monitoring and threat detection.
+                        </p>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="px-3 py-1 bg-blue-600 bg-opacity-30 rounded-full text-sm text-blue-200">Android</span>
+                            <span class="px-3 py-1 bg-blue-600 bg-opacity-30 rounded-full text-sm text-blue-200">Kotlin</span>
+                            <span class="px-3 py-1 bg-blue-600 bg-opacity-30 rounded-full text-sm text-blue-200">Security</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-divider"></div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center mono">
+                <span class="text-blue-400">></span> Get In Touch<span class="terminal-cursor"></span>
+            </h2>
+            
+            <div class="max-w-2xl mx-auto">
+                <div class="bg-gray-800 bg-opacity-50 rounded-xl p-8 backdrop-blur-sm">
+                    <form id="contactForm" class="space-y-6">
+                        <div>
+                            <label for="name" class="block text-gray-300 mb-2">Name</label>
+                            <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg form-input focus:border-blue-500 text-white" required>
+                        </div>
+                        
+                        <div>
+                            <label for="email" class="block text-gray-300 mb-2">Email</label>
+                            <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg form-input focus:border-blue-500 text-white" required>
+                        </div>
+                        
+                        <div>
+                            <label for="message" class="block text-gray-300 mb-2">Message</label>
+                            <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg form-input focus:border-blue-500 text-white" required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg text-white font-medium transition-all duration-300">
+                            Send Message
+                        </button>
+                    </form>
+                    
+                    <div class="mt-8 text-center">
+                        <p class="text-gray-400 mb-2">Or reach me directly at:</p>
+                        <a href="mailto:revexorigins+contact@gmail.com" class="text-blue-400 hover:text-blue-300 mono">revexorigins+contact@gmail.com</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-900 bg-opacity-70">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col items-center">
+                <div class="text-xl font-bold mono mb-6">
+                    <span class="text-blue-400">Shaurya</span> | <span class="text-gray-400">R3VEX:Origins</span>
+                </div>
+                
+                <div class="flex space-x-6 mb-6">
+                    <a href="#" class="text-gray-400 hover:text-blue-400 text-xl">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 text-xl">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 text-xl">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-blue-400 text-xl">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+                
+                <p class="text-gray-500 text-sm mono">
+                    © 2025 Shaurya | R3VEX:Origins. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Header scroll effect
+        window.addEventListener('scroll', function() {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.classList.add('header-scrolled');
+            } else {
+                header.classList.remove('header-scrolled');
+            }
+        });
+        
+        // Intersection Observer for animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    
+                    // Special handling for section dividers
+                    if (entry.target.classList.contains('section-divider')) {
+                        setTimeout(() => {
+                            entry.target.classList.add('visible');
+                        }, 300);
+                    }
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        // Observe all elements with 'skill-item' and 'section-divider' classes
+        document.querySelectorAll('.skill-item, .section-divider').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Mobile menu toggle
+        const mobileMenuButton = document.querySelector('button.md\\:hidden');
+        mobileMenuButton.addEventListener('click', function() {
+            const nav = document.querySelector('nav.hidden');
+            nav.classList.toggle('hidden');
+            nav.classList.toggle('block');
+            
+            // Change icon
+            const icon = mobileMenuButton.querySelector('i');
+            if (icon.classList.contains('fa-bars')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.querySelector('nav.block');
+                    if (mobileMenu && window.innerWidth < 768) {
+                        mobileMenu.classList.remove('block');
+                        mobileMenu.classList.add('hidden');
+                        const icon = mobileMenuButton.querySelector('i');
+                        icon.classList.remove('fa-times');
+                        icon.classList.add('fa-bars');
+                    }
+                }
+            });
+        });
+        
+        // Form submission
+        const contactForm = document.getElementById('contactForm');
+        if (contactForm) {
+            contactForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Here you would typically send the form data to a server
+                // For demo purposes, we'll just show an alert
+                alert('Thank you for your message! I will get back to you soon.');
+                contactForm.reset();
+            });
+        }
+    </script>
+</body>
+</html>
